@@ -6,6 +6,7 @@ categories: [windows, initial access]
 tags: [initial access, microsoft edge, google chrome, browser cache smuggling, filefix, com hijacking, dll sideloading, c2 ,sliver, shellcode injection, phishing]
 media_subpath: /assets/img/beaconing-from-browsers
 image: preview.png
+pin: true
 description: in todays blog post, i will chain browser cache smuggling, filefix and com-hijacking for initial access and persistence at the same time. the end objective of this chain is to make google chrome and microsoft edge browsers download an encrypted sliver beacon, decrypt and execute it everytime chrome or edge is launched by the victim.
 ---
 
