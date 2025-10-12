@@ -6,7 +6,7 @@ order: 4
 
 
 
-Hi, my name is Issam Azrof and welcome to my personel website!
+Hi, welcome to my personel website!
 
 This little corner of the internet is where I share my hacking adventures. Think of it as my personal notebook.
 
