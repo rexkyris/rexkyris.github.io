@@ -6,7 +6,7 @@ categories: [windows, active directory]
 tags: [webshell, php, netexec, sliver, nxc, hashcat, mysql, wireshark, pcap, certipy, SeManageVolumePrivilege]
 media_subpath: /assets/img/certificate
 image: certificate.png
-description: 
+description: by using zip concatenation we will bypass the file upload restrictions and upload a php webshell to gain the initial access, after upgrading the access to silver beacon we will setup a port forward to access the database and dump the hashes. after cracking sara's hash and gaining access to the domain controller a pcap file is found, when opening this pcap file in wireshark we will use the cipher data to construct the kerberos Pre Authentication hash for the lion.sk user and crackit with hashcat, after that we will exploit adcs esc3 vulnerability to compromise ryan.k user and finally we will abuse the SeManageVolumePrivilege privilege to dump the certificate authority certificate that contains the private key from the ceritificate store to forgue the administrator certificate.
 ---
 ## Initial Access - File Upload
 from the nmap scan results, we can see that our target is a windows domain controller with the usual services running
