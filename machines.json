@@ -1,0 +1,426 @@
+{
+
+    "editor": {
+        "machine_image": "images/icon1.png",
+        "machine_type": "linux",
+        "machine_difficulty": "easy",
+        "machine_creator": "kavigihan & TheCyberGeek",
+        "machine_rating": "4.3",
+        "user_blood": "jkr",
+        "root_blood": "tabo",
+        "tags": "subdomain,xwiki,CVE-2025-24893,CVE-2024-32019",
+        "is_live": "false",
+        "hints": {
+            "initial_access": {
+                "level_1": "subdomain",
+                "level_2": "CVE",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "XWiki Config files",
+                "level_2": "xxxxxxxxx.xxx.xml",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "19999",
+                "level_2": "CVE",
+                "all_in": ""
+            }
+        }
+    },
+        "whiterabbit": {
+        "machine_image": "images/icon3.png",
+        "machine_type": "linux",
+        "machine_difficulty": "insane",
+        "machine_creator": "FLX0x00",
+        "machine_rating": "4",
+        "user_blood": "ar0x",
+        "root_blood": "Ap4sh",
+        "tags": "uptime-kuma,n8n,webhook,gophish,sqli,restic",
+        "is_live": "false",
+        "hints": {
+            "initial_access": {
+                "level_1": "vhost enumeration first and then find the custom slug for the status page",
+                "level_2": "read the wiki and the json file (injection)",
+                "all_in": "restic backup"
+            },
+            "user": {
+                "level_1": "backup root",
+                "level_2": "use restic to create a backup for the root folder",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "xxx's password was generated using a custom binary found in /opt (vibe-reverse the binary)",
+                "level_2": "the exact time of execution was logged in the command_log table (sqli), however the microseconds \"tv_usec\" must be brute-forced (0–999 range). after generating all possible passwords, try them against ssh",
+                "all_in": "the password is WBSxhWgfnMiclrV4dqfj"
+            }
+        }
+    },
+    "era": {
+        "machine_image": "images/icon2.png",
+        "machine_type": "linux",
+        "machine_difficulty": "medium",
+        "machine_creator": "yurivich",
+        "machine_rating": "3.3",
+        "user_blood": "celesian",
+        "root_blood": "NLTE",
+        "tags": "subdomain,idor,php,ssh2.so,cron,linux-elf-binary-signer",
+        "is_live": "false",
+        "hints": {
+            "initial_access": {
+                "level_1": "Your uploaded file has a number. What if you change it to a different number?",
+                "level_2": "ssh2.so extension is installed, and the admin-only BETA feature can leverage it for command execution.",
+                "all_in": "As admin, use the preview feature \"show=true\" and \"format=ssh2.exec://eric:america@127.0.0.1/reverseshellhere%23\"  in the GET request."
+            },
+            "user": {
+                "level_1": "",
+                "level_2": "",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "A cron fires every 60 seconds",
+                "level_2": "Your custom elf needs to be signed",
+                "all_in": "Use linux-elf-binary-signer tool with the keys found inside the signing.zip \"./elf-sign sha256 certs/key.pem certs/key.pem exploit monitor\""
+            }
+        }
+    },
+    "codeparttwo": {
+        "machine_image": "images/icon4.png",
+        "machine_type": "linux",
+        "machine_difficulty": "easy",
+        "machine_creator": "FisMatHack",
+        "machine_rating": "4.4",
+        "user_blood": "NLTE",
+        "root_blood": "celesian",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "review app.py",
+                "level_2": "js2py escape",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "instance",
+                "level_2": "sqlite3 users.db",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "backup root",
+                "level_2": "",
+                "all_in": ""
+            }
+        }
+    },
+    "previous": {
+        "machine_image": "images/icon5.png",
+        "machine_type": "linux",
+        "machine_difficulty": "medium",
+        "machine_creator": "brun0ne",
+        "machine_rating": "4.3",
+        "user_blood": "Razzty",
+        "root_blood": "celesian",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "authentication bypass",
+                "level_2": "another typical  web vuln and look for js files that might contain creds",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "",
+                "level_2": "",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "you can't modify the Terraform files but Terraform has a specific naming convention (TF_VAR_name) to inject values into configurations",
+                "level_2": "The validation logic is flawed because it only checks if the string /root/examples/ is present anywhere in your path (symlinc)",
+                "all_in": ""
+            }
+        }
+    },
+    "guardian": {
+        "machine_image": "images/icon6.png",
+        "machine_type": "linux",
+        "machine_difficulty": "hard",
+        "machine_creator": "sl1de",
+        "machine_rating": "4.8",
+        "user_blood": "Anvith",
+        "root_blood": "Anvith",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "read others messages",
+                "level_2": "escalate to teacher (check composer.json)",
+                "all_in": "(csrf-token.php) (createuser.php)"
+            },
+            "user": {
+                "level_1": "reports (rfi)",
+                "level_2": "php filter chain generator",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "jamil can get-status as mark",
+                "level_2": "apache LoadModule inside file.conf",
+                "all_in": ""
+            }
+        }
+    },
+    "soulmate": {
+        "machine_image": "images/icon7.png",
+        "machine_type": "linux",
+        "machine_difficulty": "easy",
+        "machine_creator": "kavigihan",
+        "machine_rating": "3.3",
+        "user_blood": "LazyTitan33",
+        "root_blood": "LazyTitan33",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "subdomain",
+                "level_2": "",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "2222",
+                "level_2": "hard coded password",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "connect 2222",
+                "level_2": "read root",
+                "all_in": ""
+            }
+        }
+    },
+    "hacknet": {
+        "machine_image": "images/icon8.png",
+        "machine_type": "linux",
+        "machine_difficulty": "medium",
+        "machine_creator": "m4rsh3ll",
+        "machine_rating": "3.7",
+        "user_blood": "gumby",
+        "root_blood": "l1nvx",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "i like SSTI, users.values",
+                "level_2": "like the private user's post",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "",
+                "level_2": "",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "/var/tmp/django_cache/ (Pickle)",
+                "level_2": "/var/www/HackNet/backups",
+                "all_in": ""
+            }
+        }
+    },
+    "expressway": {
+        "machine_image": "images/icon9.png",
+        "machine_type": "linux",
+        "machine_difficulty": "easy",
+        "machine_creator": "dakkmaddy",
+        "machine_rating": "4.1",
+        "user_blood": "VXXDXX",
+        "root_blood": "D4rKaCe",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "udp scan",
+                "level_2": "ike-scan, psk-scan",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "",
+                "level_2": "",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "sudo",
+                "level_2": "",
+                "all_in": ""
+            }
+        }
+    },
+    "imagery": {
+        "machine_image": "images/icon10.png",
+        "machine_type": "linux",
+        "machine_difficulty": "medium",
+        "machine_creator": "Nab6eel",
+        "machine_rating": "4.3",
+        "user_blood": "NLTE",
+        "root_blood": "NLTE",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "report xss bug",
+                "level_2": "lfi api_edit.py and db.json",
+                "all_in": "\"transformType\": \"crop\",<br>\"params\": {<br>\"x\": \"; reverseshell;\",<br>}"
+            },
+            "user": {
+                "level_1": "backup",
+                "level_2": "",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "schedule a task",
+                "level_2": "",
+                "all_in": ""
+            }
+        }
+    },
+    "darkzero": {
+        "machine_image": "images/icon11.png",
+        "machine_type": "windows",
+        "machine_difficulty": "hard",
+        "machine_creator": "0xEr3bus",
+        "machine_rating": "4.3",
+        "user_blood": "ahos6",
+        "root_blood": "manesec",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "enum links",
+                "level_2": "",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "kernel",
+                "level_2": "",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "Unconstrained Delegation",
+                "level_2": "",
+                "all_in": ""
+            }
+        }
+    },
+    "signed": {
+        "machine_image": "images/icon12.png",
+        "machine_type": "windows",
+        "machine_difficulty": "medium",
+        "machine_creator": "kavigihan",
+        "machine_rating": "3.1",
+        "user_blood": "jaxafed",
+        "root_blood": "Opcode",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "",
+                "level_2": "",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "",
+                "level_2": "",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "trigger smb auth",
+                "level_2": "silver",
+                "all_in": ""
+            }
+        }
+    },
+    "conversor": {
+        "machine_image": "images/icon13.png",
+        "machine_type": "linux",
+        "machine_difficulty": "easy",
+        "machine_creator": "FisMatHack",
+        "machine_rating": "4.2",
+        "user_blood": "NLTE",
+        "root_blood": "NLTE",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "xslt injection",
+                "level_2": "A cron job runs every minute, executing any .py file in scripts directory",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "database",
+                "level_2": "",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "cve",
+                "level_2": "",
+                "all_in": ""
+            }
+        }
+    },
+    "nanocorp": {
+        "machine_image": "images/icon14.png",
+        "machine_type": "windows",
+        "machine_difficulty": "hard",
+        "machine_creator": "EmSec",
+        "machine_rating": "3.7",
+        "user_blood": "ahos6",
+        "root_blood": "Pyp",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "subdomain",
+                "level_2": "ntlm leak",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "it_support",
+                "level_2": "monitoring_svc",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "non microsoft service",
+                "level_2": "cve",
+                "all_in": ""
+            }
+        }
+    },
+    "eighteen": {
+        "machine_image": "images/icon15.png",
+        "machine_type": "windows",
+        "machine_difficulty": "easy",
+        "machine_creator": "kavigihan",
+        "machine_rating": "2.3",
+        "user_blood": "Embargo",
+        "root_blood": "ahos6",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "",
+                "level_2": "",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "impersonation",
+                "level_2": "finance",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "delegated Managed Service Account",
+                "level_2": "",
+                "all_in": ""
+            }
+        }
+    }
+}
+
+
+   

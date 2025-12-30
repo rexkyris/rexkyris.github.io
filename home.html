@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<title>Give Me Hints</title>
+<style>
+:root{
+  --accent:#06b6ff;
+  --accent-2:#67e8f9;
+  --bg:#020617;
+  --muted:rgba(223,248,255,0.6);
+  --card-bg: rgba(2,8,16,0.95);
+  --easy:#22c55e;
+  --medium:#facc15;
+  --hard:#b91c1c;
+  --insane:#b91c1c;
+  --level1:#b91c1c;
+  --level2:#b91c1c;
+  --allin:#b91c1c;
+}
+
+
+html, body { 
+  margin:0; padding:0; background:var(--bg); color:#e6fbff; font-family:system-ui,sans-serif; overflow-x:hidden; 
+  min-height:100vh;
+}
+#pageContainer{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  gap:20px;
+  min-height:100vh;
+  padding:250px 20px 40px 20px;
+}
+
+
+#particles{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+.vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.65));
+  z-index: 1;
+  pointer-events: none;
+}
+
+#footerCopyright {
+  width: 100%;
+  text-align: center;   /* center the text */
+  color: var(--muted);
+  font-size: 14px;
+  padding: 20px 0;
+  position: relative;   /* stays in normal flow */
+  z-index: 10;
+}
+
+
+
+.glow-text {
+  color: #00eaff; 
+  font-weight: 700;
+  text-shadow:
+    2px 2px 4px rgba(0,0,0,0.7),   
+    0 0 4px #00eaff,                
+    0 0 10px #06b6ff,               
+    0 0 18px rgba(6,182,255,0.25);  
+}
+#siteIntro {
+  font-family: 'Orbitron', sans-serif;
+  
+  text-align: center;
+  max-width: 700px;
+  color: #e9fbff;
+  font-size: 60px;
+  line-height: 1.5;
+  z-index: 10; 
+  position: relative;
+  bottom: 100px;
+}
+
+
+#hxLogo {
+  position: absolute;
+  top: 15px;
+  left: 40px;
+  z-index: 1001;             
+  font-family: 'Orbitron', system-ui, sans-serif; 
+  font-size: clamp(60px, 3.8vw, 80px); 
+  font-weight: 700;
+  color: #00eaff;
+ text-shadow:
+    2px 2px 4px rgba(0,0,0,0.7),   
+    0 0 4px #00eaff,                
+    0 0 10px #06b6ff,               
+    0 0 18px rgba(6,182,255,0.25);  
+  letter-spacing: 1px;
+  white-space: nowrap;
+  user-select: none;
+  padding-left: 6px;
+  flex-shrink: 1;
+}
+
+
+@media (max-width: 420px) {
+  #hxLogo { font-size: clamp(16px, 6vw, 24px); left:12px; }
+  .button-row { right:10px; gap:8px; }
+}
+
+
+
+.button-row{
+  position:absolute;          
+  top:30px;
+  right:60px;             
+  left:auto;
+  transform:none;
+  display:flex;
+  gap:30px;
+  z-index:1000;
+  align-items:center;
+}
+
+
+.button-row button{
+  position:relative;
+  padding:10px 18px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#021319;
+  font-weight:700;
+  box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent-2);
+  overflow:hidden;
+  transition: transform 0.2s;
+}
+.button-row button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent-2);
+}
+.button-row button::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  height:3px;
+  width:0;
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 8px var(--accent), 0 0 16px var(--accent-2);
+  transition:width .35s ease;
+}
+.button-row button:hover::after{ width:100%; }
+
+
+.social-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+    color: #00aaff;
+    border: 2px solid #00aaff;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 0 10px #0099ff, inset 0 0 5px #0099ff;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.social-btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 18px #00c3ff, inset 0 0 8px #00c3ff;
+}
+
+
+.search-form{
+  display:flex; gap:12px; align-items:center; width:100%; max-width:750px; top: -60px; 
+  background: rgba(255,255,255,0.03); padding:18px 26px; border-radius:14px; border:1px solid rgba(6,182,255,0.4);
+  backdrop-filter: blur(8px); box-shadow: 0 0 18px rgba(6,182,255,0.6), 0 0 40px rgba(6,182,255,0.25);
+  transition: box-shadow 0.25s ease;
+  position: relative; z-index:5;
+}
+.search-form:hover{
+  box-shadow: 0 0 28px rgba(6,182,255,0.9), 0 0 60px rgba(6,182,255,0.35);
+}
+.search-form input{
+  flex:1; background:transparent; border:none; outline:none; color:var(--muted); font-size:16px; padding:6px 8px;
+}
+.search-form button{
+  background: linear-gradient(90deg,var(--accent),var(--accent-2)); border:none; color:#031017; font-weight:700;
+  padding:12px 20px; border-radius:8px; cursor:pointer; box-shadow:0 4px 18px rgba(6,182,255,0.3);
+  transition: box-shadow 0.25s ease, transform 0.2s;
+}
+.search-form button:hover{
+  transform: translateY(-1px);
+  box-shadow:0 6px 28px rgba(6,182,255,0.6);
+}
+
+
+#cardContainer{ width:100%; display:flex; justify-content:center; margin-top:10px; }
+#resultCard{
+  max-width:760px; width:94%; border-radius:12px;
+  background:var(--card-bg); border:1px solid rgba(110,210,255,0.06);
+  padding:14px; color:var(--muted); box-shadow: 0 18px 60px rgba(2,8,25,0.6), 0 0 12px var(--accent);
+  display:grid; grid-template-columns:140px 1fr; gap:12px; align-items:start;
+  opacity:0; transform:scale(0.95); transition: opacity .28s ease, transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .3s ease;
+}
+#resultCard.show{ opacity:1; transform:scale(1); box-shadow: 0 24px 80px rgba(2,8,25,0.6), 0 0 20px var(--accent); }
+.card-image{ width:140px; height:140px; border-radius:10px; overflow:hidden; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.02); box-shadow: 0 6px 30px rgba(6,182,255,0.06);}
+.card-image img{ width:100%; height:100%; object-fit:cover; }
+.card-main h2{ margin:0; font-size:20px; letter-spacing:1px; color:#eaffff; }
+.meta-row{ display:flex; gap:12px; margin:8px 0 12px; align-items:center; flex-wrap:wrap; }
+.pill{ background: rgba(255,255,255,0.02); padding:6px 10px; border-radius:999px; color:var(--muted); font-weight:600; font-size:13px; border:1px solid rgba(110,210,255,0.04); }
+.pill.difficulty{ font-weight:700; color:#fff; }
+.pill.easy{ background: var(--easy); color:#021319; }
+.pill.medium{ background: var(--medium); color:#021319; }
+.pill.hard{ background: var(--hard); color:#fff; }
+.pill.insane{ background: var(--insane); color:#fff; }
+.details{ font-size:14px; color:var(--muted); line-height:1.4; margin-bottom:8px; }
+
+
+.hint-group{ margin-top:10px; border-top:1px dashed rgba(110,210,255,0.03); padding-top:10px; }
+.hint-title{ display:flex; justify-content:space-between; align-items:center; gap:10px; cursor:pointer; }
+.hint-title h4{ margin:0; font-size:19px; color:#e9fbff; }
+.hint-content{ margin-top:8px; display:none; gap:8px; transition: all .28s ease; }
+.hint-content.open{ display:block; }
+.hint-buttons{ display:flex; gap:8px; margin-bottom:8px; }
+.hint-buttons button {
+  flex:1;
+  padding:6px 10px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:600;
+  color:#021319;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: none; 
+}
+.hint-buttons button:hover {
+  transform: translateY(-1px);
+  box-shadow: none;
+}.hint-buttons button[data-level="level_1"]{ background: linear-gradient(90deg,#013220,#84f5c9); }
+.hint-buttons button[data-level="level_2"]{ background: linear-gradient(90deg,#FF4F00,#fce57f); }
+.hint-buttons button[data-level="all_in"]{ background: linear-gradient(90deg,#b91c1c,#f87171); }
+
+.hint-level-text{ display:none; padding:6px 10px; border-radius:6px; background: rgba(255,255,255,0.03); border:1px solid rgba(110,210,255,0.02); color:var(--muted); font-size:15px; margin-bottom:7px; }
+
+.live-badge{ display:inline-block; padding:6px 10px; border-radius:8px; font-weight:700; color:#021319; background: linear-gradient(90deg,#22c55e,#84f5c9); }
+.hidden{ display:none; }
+
+@media (max-width:720px){ #resultCard{ grid-template-columns: 1fr; } .card-image{ width:100%; height:200px; } }
+</style>
+</head>
+<body>
+
+
+
+<div id="hxLogo">HTB</div>
+<div class="button-row">
+    <a href="https://github.com/rexkyris" target="_blank" class="social-btn">
+        <i class="fab fa-github"></i>
+    </a>
+
+    <a href="https://x.com/rexkyris" target="_blank" class="social-btn">
+        <i class="fab fa-x-twitter"></i>
+    </a>
+
+    <a href="mailto:rexkyris@proton.me" class="social-btn">
+        <i class="fas fa-envelope"></i>
+    </a>
+</div>
+
+<canvas id="particles"></canvas>
+<div class="vignette"></div>
+
+<div id="pageContainer">
+<div id="siteIntro">
+    give me <span class="glow-text">hints</span>.
+  </div>
+
+  <form id="searchForm" class="search-form" autocomplete="off">
+    <input id="searchInput" type="text" placeholder="Search machine name...">
+    <button type="submit">Search</button>
+  </form>
+
+  <div id="cardContainer">
+    <div id="resultCard" class="hidden"></div>
+  </div>
+</div>
+
+<script>
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+let w, h;
+const cellSize = 40;
+const gridCells = [];
+function resizeCanvas() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = document.body.scrollHeight;
+    gridCells.length = 0;
+    for(let x=0;x<w;x+=cellSize){
+        for(let y=0;y<h;y+=cellSize){
+            gridCells.push({x,y});
+        }
+    }
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+const images=[];
+for(let i=1;i<=15;i++){const img=new Image();img.src=`images/icon${i}.png`;images.push(img);}
+const FLICKER_COUNT=5; let flickers=[];
+function initFlickers(){flickers=[]; const total=gridCells.length; while(flickers.length<FLICKER_COUNT && flickers.length<total){ const idx=Math.floor(Math.random()*total); const imgIdx=Math.floor(Math.random()*images.length); if(!flickers.some(f=>f.idx===idx)) flickers.push({idx,imgIdx,pulse:Math.random()});}}
+initFlickers();
+function updateFlickers(){flickers.forEach(f=>{if(Math.random()<0.01)f.idx=Math.floor(Math.random()*gridCells.length); if(Math.random()<0.02)f.imgIdx=Math.floor(Math.random()*images.length); f.pulse+=0.01; if(f.pulse>1) f.pulse=0;});}
+function drawGrid(){ctx.fillStyle='#020617';ctx.fillRect(0,0,w,h);updateFlickers();gridCells.forEach((cell,idx)=>{const flicker=flickers.find(f=>f.idx===idx); if(flicker){const color='#06b6ff'; const pulseValue=(Math.sin(flicker.pulse*Math.PI*2)*0.5+0.5); const glow=pulseValue*(cellSize/2)+4; ctx.shadowColor=color; ctx.shadowBlur=glow*2; ctx.shadowOffsetX=0; ctx.shadowOffsetY=0; const img=images[flicker.imgIdx]; if(img && img.complete && img.naturalWidth!==0){ctx.drawImage(img,cell.x,cell.y,cellSize,cellSize);}else{ctx.fillStyle=color;ctx.fillRect(cell.x+2,cell.y+2,cellSize-4,cellSize-4);} ctx.strokeStyle=color; ctx.lineWidth=2;ctx.strokeRect(cell.x,cell.y,cellSize,cellSize);}else{ctx.shadowBlur=0;ctx.strokeStyle='rgba(6,182,255,0.08)';ctx.lineWidth=1;ctx.strokeRect(cell.x,cell.y,cellSize,cellSize);}});requestAnimationFrame(drawGrid);}
+drawGrid();
+
+
+let machines={};
+fetch('./machines.json').then(r=>r.ok?r.json():Promise.reject('Failed')).then(d=>machines=d).catch(e=>console.error(e));
+
+
+const searchForm=document.getElementById('searchForm');
+const searchInput=document.getElementById('searchInput');
+const resultCard=document.getElementById('resultCard');
+
+function clearCard(){resultCard.classList.remove('show'); resultCard.classList.add('hidden'); resultCard.innerHTML='';}
+function showCardHTML(html){resultCard.innerHTML=html; resultCard.classList.remove('hidden'); void resultCard.offsetWidth; resultCard.classList.add('show');}
+
+function buildCard(machineKey,machineObj){
+  const imgSrc=machineObj.machine_image||'';
+  const name=machineKey||'Unknown';
+  const type=machineObj.machine_type||'—';
+  const diff=machineObj.machine_difficulty||'—';
+  const rating=machineObj.machine_rating||'—';
+  const creator=machineObj.machine_creator||'—';
+  const user_blood=machineObj.user_blood||'—';
+  const root_blood=machineObj.root_blood||'—';
+  const live=String(machineObj.is_live||'').toLowerCase()==='true';
+  const hints=machineObj.hints||{};
+  const diffClass={'easy':'easy','medium':'medium','hard':'hard','insane':'insane'}[diff.toLowerCase()]||'';
+  return `
+<div class="card-image">${imgSrc?`<img src="${imgSrc}" alt="${name} image" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)">No Image</div>`}</div>
+<div class="card-main">
+  <h2>${name.toUpperCase()}</h2>
+  <div class="meta-row">
+    <div class="pill">OS: ${type}</div>
+    <div class="pill difficulty ${diffClass}">Difficulty: ${diff}</div>
+    <div class="pill">Rating: ${rating}</div>
+    ${live?`<div class="pill live-badge" aria-label="Live machine">LIVE</div>`:''}
+  </div>
+  <div class="details">
+    <div><strong>Creator:</strong> ${creator}</div>
+    <div><strong>User blood:</strong> ${user_blood}</div>
+    <div><strong>Root blood:</strong> ${root_blood}</div>
+  </div>
+  ${buildHintsHTML(hints, machineKey)}
+</div>`;
+}
+
+function buildHintsHTML(hints, machineKey){
+  const groups=['initial_access','user','root'];
+  let out='<div class="hint-group">';
+  groups.forEach(g=>{
+    const groupObj=hints[g]||null;
+    const hasContent=groupObj && Object.keys(groupObj).length>0;
+    out+=`<div class="single-hint" data-group="${g}" data-machine="${machineKey}">
+      <div class="hint-title" role="button" tabindex="0">
+        <h4>${labelize(g)}</h4>
+        <small style="opacity:0.85">${hasContent?'show':'no hints'}</small>
+      </div>
+      <div class="hint-content">
+        ${hasContent?`
+          <div class="hint-buttons">
+            ${groupObj.level_1?`<button data-level="level_1">hint 1</button>`:''}
+            ${groupObj.level_2?`<button data-level="level_2">hint 2</button>`:''}
+            ${groupObj.all_in?`<button data-level="all_in">hint 3</button>`:''}
+          </div>
+          <div class="hint-level-text"></div>
+        `:`<div style="opacity:0.7">No hints available.</div>`}
+      </div>
+    </div>`;
+  });
+  out+='</div>';return out;
+}
+
+function labelize(key){if(key==='initial_access')return 'Initial Access';if(key==='user')return 'User';if(key==='root')return 'Root';return key;}
+
+function wireHintToggles(){
+  const groups=resultCard.querySelectorAll('.single-hint');
+  groups.forEach(g=>{
+    const title=g.querySelector('.hint-title');
+    const content=g.querySelector('.hint-content');
+    if(!title||!content) return;
+    const hintTextContainer = content.querySelector('.hint-level-text');
+    function toggle(){
+      const isOpen = content.classList.toggle('open'); 
+      title.setAttribute('aria-expanded', isOpen?'true':'false');
+    }
+    title.addEventListener('click',toggle);
+    title.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();toggle();}});
+
+    const buttons = content.querySelectorAll('.hint-buttons button');
+    buttons.forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const lvl = btn.dataset.level;
+        const machineKey = g.dataset.machine;
+        const hint = machines[machineKey]?.hints?.[g.dataset.group]?.[lvl] || '<em>—</em>';
+        if(hintTextContainer) {
+          hintTextContainer.innerHTML = hint;
+          hintTextContainer.style.display = 'block';
+        }
+      });
+    });
+  });
+}
+
+searchForm.addEventListener('submit',e=>{
+  e.preventDefault();
+  const q=String(searchInput.value||'').trim().toLowerCase();
+  if(!q){clearCard();return;}
+  if(Object.keys(machines).length===0){alert('Machine data still loading — please try again in a moment.');return;}
+  if(machines.hasOwnProperty(q)){
+    const m=machines[q];
+    showCardHTML(buildCard(q,m));
+    setTimeout(()=>wireHintToggles(),50);
+  } else {
+    showCardHTML(`<div style="grid-column:1/-1"><p style="color:#b91c1c;margin:0">Machine "<strong>${escapeHtml(q)}</strong>" not uploaded yet, or it is old "<strong>2024-</strong>".</p></div>`);
+    setTimeout(()=>clearCard(),5000);
+  }
+});
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];});}
+
+// Typing placeholder
+const input=searchInput;
+const placeholders=["DARKCORP","RUSTYKEY","VOLEUR","CERTIFICATE","PUPPY"];
+let idx=0,char=0,deleting=false;
+function type(){ const text=placeholders[idx]; if(!deleting){ input.placeholder=text.substring(0,char++); if(char===text.length+1){deleting=true; setTimeout(type,1200);return;} }else{ input.placeholder=text.substring(0,char--); if(char===0){deleting=false; idx=(idx+1)%placeholders.length; } } setTimeout(type,deleting?40:70);}
+type();
+
+// Vignette height adjust
+function updateVignetteHeight() {
+    const vh = document.body.scrollHeight;
+    document.querySelector('.vignette').style.height = vh + 'px';
+}
+window.addEventListener('resize', updateVignetteHeight);
+searchForm.addEventListener('submit', () => setTimeout(updateVignetteHeight, 50));
+
+</script>
+<div id="footerCopyright">
+  &copy; 2025 rexkyris. All rights reserved.
+</div>
+
+</body>
+</html>
