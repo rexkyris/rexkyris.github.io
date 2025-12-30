@@ -438,8 +438,8 @@ searchForm.addEventListener('submit',e=>{
     showCardHTML(buildCard(q,m));
     setTimeout(()=>wireHintToggles(),50);
   } else {
-    showCardHTML(`<div style="grid-column:1/-1"><p style="color:#b91c1c;margin:0">Machine "<strong>${escapeHtml(q)}</strong>" not uploaded yet, or it is old "<strong>2024-</strong>".</p></div>`);
-    setTimeout(()=>clearCard(),5000);
+    showCardHTML(`<div style="grid-column:1/-1"><p style="color:#b91c1c;margin:0">Machine "<strong>${escapeHtml(q)}</strong>" not found.</p></div>`);
+    setTimeout(()=>clearCard(),2000);
   }
 });
 
@@ -467,3 +467,4 @@ searchForm.addEventListener('submit', () => setTimeout(updateVignetteHeight, 50)
 
 </body>
 </html>
+
