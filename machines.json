@@ -461,7 +461,7 @@
         "hints": {
             "initial_access": {
                 "level_1": "If you don't have an account yet, it might be time to create one.",
-                "level_2": "You're in… but are you really in charge? Some doors only open for those with a little more",
+                "level_2": "You're in… but are you really in charge? Some doors only open for those with a little more authority.",
                 "all_in": "Have you looked where static assets like to hang out?… sometimes data floats in the cloud."
             },
             "user": {
@@ -480,5 +480,6 @@
 
 
    
+
 
 
