@@ -93,22 +93,22 @@
         "user_blood": "NLTE",
         "root_blood": "celesian",
         "tags": "",
-        "is_live": "true",
+        "is_live": "false",
         "hints": {
             "initial_access": {
                 "level_1": "review app.py",
                 "level_2": "js2py escape",
-                "all_in": ""
+                "all_in": "CVE-2024–28397"
             },
             "user": {
                 "level_1": "instance",
                 "level_2": "sqlite3 users.db",
-                "all_in": ""
+                "all_in": "the user password is sweetangelbabylove"
             },
             "root": {
-                "level_1": "backup root",
-                "level_2": "",
-                "all_in": ""
+                "level_1": "sudo -l",
+                "level_2": "backup root",
+                "all_in": "https://github.com/AliElKhatteb/npbackup-cli-priv-escalation"
             }
         }
     },
@@ -317,7 +317,7 @@
         "user_blood": "jaxafed",
         "root_blood": "Opcode",
         "tags": "",
-        "is_live": "true",
+        "is_live": "false",
         "hints": {
             "initial_access": {
                 "level_1": "",
@@ -331,8 +331,8 @@
             },
             "root": {
                 "level_1": "trigger smb auth",
-                "level_2": "silver",
-                "all_in": ""
+                "level_2": "check sysadmin members",
+                "all_in": "silver ticket"
             }
         }
     },
@@ -447,9 +447,38 @@
                 "all_in": ""
             }
         }
+    },
+    "facts": {
+        "machine_image": "images/icon17.png",
+        "machine_type": "linux",
+        "machine_difficulty": "easy",
+        "machine_creator": "LazyTitan33",
+        "machine_rating": "4.5",
+        "user_blood": "Opcode",
+        "root_blood": "Neospring",
+        "tags": "",
+        "is_live": "true",
+        "hints": {
+            "initial_access": {
+                "level_1": "If you don't have an account yet, it might be time to create one.",
+                "level_2": "You're in… but are you really in charge? Some doors only open for those with a little more",
+                "all_in": "Have you looked where static assets like to hang out?… sometimes data floats in the cloud."
+            },
+            "user": {
+                "level_1": "",
+                "level_2": "",
+                "all_in": ""
+            },
+            "root": {
+                "level_1": "Some well-known binaries have documented tricks for privilege escalation",
+                "level_2": "",
+                "all_in": ""
+            }
+        }
     }
 }
 
 
    
+
 
